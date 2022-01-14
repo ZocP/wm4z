@@ -2,9 +2,17 @@
   <div class="about">
     <NavBar location=1>
     </NavBar>
-    <div class = pic_about>
-      <div class="button_about previous"></div>
-      <div class="button_about next"></div>
+    <div class="container_about">
+      <div class = "pic_about">
+        <div class="button_about previous">
+          <img src="../assets/elements/arrow_next.svg" alt="" style="transform: rotateY(180deg)">
+        </div>
+        <div class="swiper_pics">
+        </div>
+        <div class="button_about next">
+          <img src="../assets/elements/arrow_next.svg" alt="">
+        </div>
+      </div>
     </div>
 
   </div>
@@ -24,20 +32,37 @@ export default {
 </script>
 
 <style scoped>
+  .swiper_pics{
+    box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    height: 100%;
+    width: 80%;
+    background-color:#E6E4D7;
+  }
+  .container_about{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #98012E;
+    height: 100%;
+    width: 100%;
+  }
   .pic_about{
+    display: flex;
+    justify-content: center;
     position: absolute;
     width: 1680px;
     height: 787px;
-    left: 128px;
-    top: 197px;
-  }
-  .
-  .button_about{
 
+  }
+  .button_about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     width: 80px;
     height: 80px;
-    top: 35%;
+    top: 45%;
     border-radius: 100%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     background-color: #E6E4D7;
@@ -49,7 +74,6 @@ export default {
     right: 0;
   }
   .about{
-    height: 100vh;
-    background-color: #98012E;
+    height: 100vh
   }
 </style>
