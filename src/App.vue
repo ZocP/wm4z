@@ -13,7 +13,6 @@
   *{
     margin:0;
     border:0;
-
   }
   html{
     font-family: Sansation,serif;

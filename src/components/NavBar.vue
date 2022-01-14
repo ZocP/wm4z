@@ -2,16 +2,19 @@
   <div class="whole">
     <img class="nav-img" src="../assets/school.png">
     <div class = "parts">
-      <div class="cell" :class="{cell_enhance_red: nowActive===0}" @click="navigatePage(0)">
-        <a href="#/home">About&nbsp;LCDS</a>
+      <div class="cell" :class="{cell_enhance_red: location === '0'}">
+        <a href="#/home">Welcome</a>
       </div>
-      <div class="cell" :class="{cell_enhance_red: nowActive===1}" @click="navigatePage(1)">
-        <a href="#/home">Tour</a>
+      <div class="cell" :class="{cell_enhance_red: location ==='1'}" >
+        <a href="#/about">About LCDS</a>
       </div>
-      <div class="cell" :class="{cell_enhance_red: nowActive===2}" @click="navigatePage(2)">
-        <a href="#/home">Calender</a>
+      <div class="cell" :class="{cell_enhance_red: location === '2'}">
+        <a href="#/tour">Tour</a>
       </div>
-      <div class="cell" :class="{cell_enhance_red: nowActive===3}" @click="navigatePage(3)">
+      <div class="cell" :class="{cell_enhance_red: location ==='3'}">
+        <a href="#/calender">Calender</a>
+      </div>
+      <div class="cell" :class="{cell_enhance_red: location ==='4'}">
         <a href="#/more">More</a>
       </div>
 
@@ -21,16 +24,10 @@
 
 <script>
   export default {
+
     name: "NavBar",
-    data:function(){
-      return{
-        nowActive:0
-      }
-    },
+    props:['location'],
     methods: {
-      navigatePage(pageId){
-        this.nowActive =pageId
-      }
     },
     computed:{
 
@@ -77,14 +74,12 @@
   }
   .whole{
     display: flex;
-
     align-items: center;
     width: 100%;
     padding-left: 0.5em;
     margin: 0;
     background: #E6E4D7;
     height: 80px;
-
 
     box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 10px 10px;
