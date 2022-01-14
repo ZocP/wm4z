@@ -6,12 +6,13 @@
           <img
             src="../assets/elements/arrow_next.svg"
             alt=""
-            style="transform: rotateY(180deg)"
+
           />
         </div>
         <div class="swiper_pics"></div>
         <div class="button_about next">
-          <img src="../assets/elements/arrow_next.svg" alt="" />
+          <img src="../assets/elements/arrow_next.svg" alt=""
+          style="transform: rotateY(180deg)">
         </div>
       </div>
     </div>
@@ -38,16 +39,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #98012e;
+  background-color: #A42121;
   height: 100%;
+
   width: 100%;
+  top:10%
 }
 .pic_about {
   display: flex;
   justify-content: center;
   position: absolute;
-  width: 1680px;
-  height: 787px;
+  width: 80%;
+  height: 70%;
 }
 .button_about {
   display: flex;

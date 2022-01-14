@@ -43,10 +43,34 @@ export default {
           name: "More",
         },
       ],
-      active: 0,
+      active:0
     };
   },
   methods: {
+    setFirst(){
+      switch (this.$route.path){
+        case "/home":
+          //this.setStyle(0);
+          return 0;
+        case "/about":
+          //this.setStyle(1);
+          return 1;
+        case "/tour":
+          //this.setStyle(2);
+          return 2;
+        case "/calender":
+          //this.setStyle(3);
+          return 3;
+        case "/more":
+          //this.setStyle(4);
+          return 4;
+      }
+    },
+    setStyle(index){
+      this.active = index;
+      console.log(this.$refs.refCell);
+      this.$refs.refCell.style.setProperty("--Index", `${index}`);
+    },
     toRoute(item, index) {
       console.log(item.path);
       if (this.$route.path === item.path) {
@@ -59,7 +83,10 @@ export default {
       console.log(index);
     },
   },
-  computed: {},
+  mounted() {
+    this.active=this.setFirst()
+  }
+
 };
 </script>
 
@@ -71,7 +98,6 @@ export default {
   margin: 0;
   background: #e6e4d7;
   height: 80px;
-
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 0px 0px 10px 10px;
 }
@@ -99,7 +125,7 @@ export default {
   height: 100%;
   width: calc(1 / 5 * 100%);
   color: #e6e4d7;
-  background-color: #89012e;
+  background-color: #A42121;
   /* background-color: rgba(255, 255, 255, 0.6); */
 
   border-radius: 22px;

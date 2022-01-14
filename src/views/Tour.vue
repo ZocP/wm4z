@@ -1,5 +1,9 @@
 <template>
-  <div></div>
+  <div class = "tour">
+    <div class = "container_tour">
+      
+    </div>
+  </div>
 </template>
 
 <script>
@@ -8,4 +12,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.tour{
+  height: 100vh;
+  width: 100%;
+  background-color: #e6e4d7;
+}
+</style>

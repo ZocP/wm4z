@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div class = "calender">
+    a
+  </div>
 </template>
 
 <script>
@@ -8,4 +10,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .calender{
+    height : 100vh;
+    width: 100%;
+    background-color: #A42121;
+  }
+</style>
