@@ -1,19 +1,11 @@
 <template>
-  <NavBar location = 4>
-
-  </NavBar>
+  <div></div>
 </template>
 
 <script>
-import NavBar from '../components/NavBar'
 export default {
   name: "More",
-  components:{
-    NavBar
-  }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

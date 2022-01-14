@@ -1,17 +1,11 @@
 <template>
-  <NavBar location = 2>
-
-  </NavBar>
+  <div></div>
 </template>
 
 <script>
-import NavBar from "../components/NavBar";
 export default {
   name: "Tour",
-  components: {NavBar}
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
