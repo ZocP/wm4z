@@ -6,7 +6,6 @@
           <img
             src="../assets/elements/arrow_next.svg"
             alt=""
-
           />
         </div>
         <div class="swiper_pics"></div>

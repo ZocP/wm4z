@@ -43,50 +43,50 @@ export default {
           name: "More",
         },
       ],
-      active:0
+      active : 0,
     };
+  },
+  watch:{
+    $route: {
+      // 深度观察监听
+      handler:function(){
+        this.setFirst()
+      },
+      deep: true
+    }
   },
   methods: {
     setFirst(){
       switch (this.$route.path){
         case "/home":
-          //this.setStyle(0);
-          return 0;
+          this.setCellStyle(0);
+          return
         case "/about":
-          //this.setStyle(1);
-          return 1;
+          this.setCellStyle(1);
+          return
         case "/tour":
-          //this.setStyle(2);
-          return 2;
+          this.setCellStyle(2);
+          return
         case "/calender":
-          //this.setStyle(3);
-          return 3;
+          this.setCellStyle(3);
+          return
         case "/more":
-          //this.setStyle(4);
-          return 4;
+          this.setCellStyle(4);
+          return
       }
     },
-    setStyle(index){
+    setCellStyle(index){
       this.active = index;
-      console.log(this.$refs.refCell);
       this.$refs.refCell.style.setProperty("--Index", `${index}`);
     },
     toRoute(item, index) {
-      console.log(item.path);
       if (this.$route.path === item.path) {
         return;
       }
-      this.active = index;
-      console.log(this.$refs.refCell);
-      this.$refs.refCell.style.setProperty("--Index", `${index}`);
       this.$router.push(item.path);
       console.log(index);
     },
   },
-  mounted() {
-    this.active=this.setFirst()
-  }
-
 };
 </script>
 
