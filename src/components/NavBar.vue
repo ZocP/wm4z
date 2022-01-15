@@ -1,13 +1,13 @@
 <template>
-  <div class="whole">
-    <img class="nav-img" src="../assets/school.png" />
+  <div :class="{whole_white:whiteTheme, whole_red : redTheme}">
+    <img class="nav-img" :src=logo_source />
     <div class="parts" ref="refCell">
       <div
         @click="toRoute(item, index)"
         v-for="(item, index) in navList"
         :key="item.name"
-        class="cell"
-        :style="active === index ? 'color: #e6e4d7;' : ''"
+        :class="{cell_red : whiteTheme, cell_white : redTheme}"
+        :style="active === index ? 'color:' + activeCell : ''"
       >
         <div class="cell-item">{{ item.name }}</div>
       </div>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import whiteRose from '../assets/rose_white.png'
+import redRose from '../assets/rose_red.png'
 export default {
   name: "NavBar",
   data() {
@@ -44,40 +46,58 @@ export default {
         },
       ],
       active : 0,
+      redTheme : false,
+      whiteTheme : true,
+      logo_source:  redRose
+
     };
   },
   watch:{
     $route: {
-      // 深度观察监听
       handler:function(){
-        this.setFirst()
+        console.log("abc")
+        this.setTheme()
       },
       deep: true
     }
   },
   methods: {
-    setFirst(){
+    setTheme(){
       switch (this.$route.path){
         case "/home":
-          this.setCellStyle(0);
+          this.setWhiteStyle(0);
           return
         case "/about":
-          this.setCellStyle(1);
+          this.setWhiteStyle(1);
           return
         case "/tour":
-          this.setCellStyle(2);
+          this.setRedStyle(2);
           return
         case "/calender":
-          this.setCellStyle(3);
+          this.setWhiteStyle(3);
           return
         case "/more":
-          this.setCellStyle(4);
+          this.setRedStyle(4);
           return
       }
     },
-    setCellStyle(index){
+    setWhiteStyle(index){
+      this.whiteTheme = true;
+      this.redTheme = false;
       this.active = index;
+      this.logo_source = redRose
       this.$refs.refCell.style.setProperty("--Index", `${index}`);
+      this.$refs.refCell.style.setProperty("--cell_color", `#A42121`);
+      this.$refs.refCell.style.setProperty("--font_color", `#E6E4D7`);
+    },
+    setRedStyle(index){
+      this.redTheme = true;
+      this.whiteTheme = false;
+      this.active = index;
+      this.logo_source = whiteRose
+      this.$refs.refCell.style.setProperty("--Index", `${index}`);
+      this.$refs.refCell.style.setProperty("--cell_color", `#E6E4D7`);
+      this.$refs.refCell.style.setProperty("--font_color", `#A42121`);
     },
     toRoute(item, index) {
       if (this.$route.path === item.path) {
@@ -87,11 +107,23 @@ export default {
       console.log(index);
     },
   },
+  computed:{
+    activeCell: function(){
+      if(this.redTheme){
+        return '#A42121';
+      }
+      return '#e6e4d7';
+
+    }
+  },
+  mounted() {
+    this.setTheme()
+  }
 };
 </script>
 
 <style scoped>
-.whole {
+.whole_white {
   display: flex;
   align-items: center;
   padding-left: 0.5em;
@@ -101,12 +133,25 @@ export default {
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 0px 0px 10px 10px;
 }
+.whole_red {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5em;
+  margin: 0;
+  background: #A42121;
+  height: 80px;
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 10px 10px;
+}
+
 .nav-img {
   height: 100%;
   width: auto;
   margin: auto;
 }
 .parts {
+  --font-color: white;
+  --cell_color: #A42121;
   --Index: 0;
   position: relative;
   z-index: 0;
@@ -124,16 +169,19 @@ export default {
   left: 0;
   height: 100%;
   width: calc(1 / 5 * 100%);
-  color: #e6e4d7;
-  background-color: #A42121;
-  /* background-color: rgba(255, 255, 255, 0.6); */
-
+  color: var(--font-color);
+  background-color: var(--cell_color);
   border-radius: 22px;
   transform: translateX(calc(var(--Index) * 100%));
   transition: 0.5s ease;
   z-index: -1;
 }
-.cell {
+.cell_red:hover{
+  border-radius: 22px;
+  background-color: #A42121;
+  color: #e6e4d7;
+}
+.cell_red {
   flex: 1;
   position: relative;
   display: flex;
@@ -142,17 +190,30 @@ export default {
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 36px;
-  color: #89012e;
+  color: #A42121;
   text-decoration: none;
-  text-align: center;
   cursor: pointer;
 }
-
+.cell_white{
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 36px;
+  color: #e6e4d7;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cell_white:hover{
+  border-radius: 22px;
+  background-color: #e6e4d7;
+  color: #A42121;
+}
 .cell-item {
 }
-/* .cell_enhance_red a {
-  color: #e6e4d7;
-} */
 
 h1 {
   margin: 0;
