@@ -176,11 +176,11 @@ export default {
   transition: 0.5s ease;
   z-index: -1;
 }
-.cell_red:hover{
-  border-radius: 22px;
-  background-color: #A42121;
-  color: #e6e4d7;
-}
+/*.cell_red:hover{*/
+/*  border-radius: 22px;*/
+/*  background-color: #A42121;*/
+/*  color: #e6e4d7;*/
+/*}*/
 .cell_red {
   flex: 1;
   position: relative;
@@ -207,15 +207,11 @@ export default {
   text-decoration: none;
   cursor: pointer;
 }
-.cell_white:hover{
-  border-radius: 22px;
-  background-color: #e6e4d7;
-  color: #A42121;
-}
+/*.cell_white:hover{*/
+/*  border-radius: 22px;*/
+/*  background-color: #e6e4d7;*/
+/*  color: #A42121;*/
+/*}*/
 .cell-item {
-}
-
-h1 {
-  margin: 0;
 }
 </style>
