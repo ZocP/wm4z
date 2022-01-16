@@ -1,18 +1,21 @@
 <template>
-  <div :class="{whole_white:whiteTheme, whole_red : redTheme}">
-    <img class="nav-img" :src=logo_source />
-    <div class="parts" ref="refCell">
-      <div
-        @click="toRoute(item, index)"
-        v-for="(item, index) in navList"
-        :key="item.name"
-        :class="{cell_red : whiteTheme, cell_white : redTheme}"
-        :style="active === index ? 'color:' + activeCell : ''"
-      >
-        <div class="cell-item">{{ item.name }}</div>
+  <div :class = "{nav_white:whiteTheme, nav_red : redTheme}">
+    <div :class="{whole_white:whiteTheme, whole_red : redTheme}">
+      <img class="nav-img" :src=logo_source />
+      <div class="parts" ref="refCell">
+        <div
+            @click="toRoute(item, index)"
+            v-for="(item, index) in navList"
+            :key="item.name"
+            :class="{cell_red : whiteTheme, cell_white : redTheme}"
+            :style="active === index ? 'color:' + activeCell : ''"
+        >
+          <div class="cell-item">{{ item.name }}</div>
+        </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -48,8 +51,7 @@ export default {
       active : 0,
       redTheme : false,
       whiteTheme : true,
-      logo_source:  redRose
-
+      logo_source : redRose,
     };
   },
   watch:{
@@ -113,7 +115,6 @@ export default {
         return '#A42121';
       }
       return '#e6e4d7';
-
     }
   },
   mounted() {
@@ -127,8 +128,7 @@ export default {
   display: flex;
   align-items: center;
   padding-left: 0.5em;
-  margin: 0;
-  background: #e6e4d7;
+  background-color: #e6e4d7;
   height: 80px;
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 0px 0px 10px 10px;
@@ -137,8 +137,7 @@ export default {
   display: flex;
   align-items: center;
   padding-left: 0.5em;
-  margin: 0;
-  background: #A42121;
+  background-color: #A42121;
   height: 80px;
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 0px 0px 10px 10px;
@@ -185,14 +184,13 @@ export default {
   flex: 1;
   position: relative;
   display: flex;
-  justify-content: center; /* 水平居中 */
+  justify-content: center;
   align-items: center;
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 36px;
   color: #A42121;
   text-decoration: none;
-  cursor: pointer;
 }
 .cell_white{
   flex: 1;
@@ -205,7 +203,6 @@ export default {
   font-size: 36px;
   color: #e6e4d7;
   text-decoration: none;
-  cursor: pointer;
 }
 /*.cell_white:hover{*/
 /*  border-radius: 22px;*/
@@ -213,5 +210,19 @@ export default {
 /*  color: #A42121;*/
 /*}*/
 .cell-item {
+}
+.nav_white{
+  z-index: 1000;
+  height: 80px;
+  position: absolute;
+  width: 100%;
+  background-color: #A42121;
+}
+.nav_red{
+  z-index: 1000;
+  height: 80px;
+  position: absolute;
+  width: 100%;
+  background-color: #e6e4d7;
 }
 </style>

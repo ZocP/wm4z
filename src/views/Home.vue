@@ -45,9 +45,9 @@ export default {
 }
 .intro {
   position: absolute;
-  width: 700px;
-  height: 500px;
-  left: 15%;
+  width: 45vw;
+  height: 45vh;
+  left: 15vw;
   top: 35%;
 
   background: rgba(80, 80, 80, 0.67);
@@ -57,7 +57,7 @@ export default {
 }
 .button p {
   width: 100%;
-  font-size: 36px;
+  font-size: 1.5vw;
   display: flex;
   justify-content: center;
   color: #a42121;
@@ -66,10 +66,10 @@ export default {
 }
 .button {
   position: absolute;
-  width: 343px;
-  height: 92px;
-  left: 65%;
-  top: 748px;
+  width: 15vw;
+  height: 5vw;
+  right: 15%;
+  top: 75vh;
   display: flex;
   align-items: center;
 
@@ -79,15 +79,15 @@ export default {
 }
 .title {
   position: absolute;
-  width: 579px;
+  width: 100%;
   height: 110px;
-  left: 87px;
+  left: 5%;
   top: 80px;
 
   font-style: normal;
   font-weight: normal;
-  font-size: 36px;
-  line-height: 45px;
+  font-size: 3vw;
+  line-height: 1vw;
   /* or 126% */
 
   color: #ffffff;
@@ -96,15 +96,15 @@ export default {
 }
 .info {
   position: absolute;
-  width: 552px;
+  width: 75%;
   height: 195px;
-  left: 87px;
-  top: calc(50% - 195px / 2 + 82px);
+  left: 5%;
+  top: 30%;
 
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 27px;
+  font-size: 1.5vw;
+  line-height: 3.5vh;
   /* or 135% */
 
   color: #e6e4d7;

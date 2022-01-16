@@ -66,9 +66,11 @@ export default {
 .previous {
   left: 0;
 }
+
 .next {
   right: 0;
 }
+
 .about {
   height: 100vh;
 }
