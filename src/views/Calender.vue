@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less">
   .calender{
     display: flex;
     justify-content: center;
@@ -36,14 +36,23 @@ export default {
     height : 100vh;
     width: 100%;
     background-color: #A42121;
+
+    .calender_container{
+      box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      width: 80vw;
+      background-color: #e6e4d7;
+    }
+    .ant-radio-group{
+      display:none;
+    }
+    .columnheader{
+      display: flex;
+      justify-content: center;
+    }
+    .ant-select{
+      display: none;
+    }
   }
-  .calender_container{
-    box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    width: 80vw;
-    background-color: #e6e4d7;
-  }
-  .ant-fullcalendar-header{
-    display: none;
-  }
+
 </style>

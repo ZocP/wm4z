@@ -8,7 +8,13 @@
             alt=""
           />
         </div>
-        <div class="swiper_pics"></div>
+        <div class="swiper_pics">
+          <img
+              class=""
+              :src= "aboutBackGround"
+              alt=""
+          />
+        </div>
         <div class="button_about next">
           <img src="../assets/elements/arrow_next.svg" alt=""
           style="transform: rotateY(180deg)">
@@ -19,11 +25,31 @@
 </template>
 
 <script>
+import about from "../assets/about_pic.png"
+import axios from "axios"
 export default {
   name: "About",
-
-  methods: {},
-};
+  data:function(){
+    return{
+      aboutBackGround : about
+    }
+  },
+  methods: {
+    requestAbouts(){
+      axios.get('http://localhost:8080/about',{params:{
+          from : 4,
+          to : 4,
+        }}).then(response =>{
+        this.aboutBackGround = response.data.Data[0].picture
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  },
+  mounted(){
+    this.requestAbouts()
+  }
+}
 </script>
 
 <style scoped>
@@ -33,7 +59,17 @@ export default {
   height: 100%;
   width: 80%;
   background-color: #e6e4d7;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
+
+.swiper_pics img{
+  height: 100%;
+  z-index: 100;
+  border-radius:10px;
+}
+
 .container_about {
   display: flex;
   align-items: center;
@@ -51,6 +87,7 @@ export default {
   width: 80%;
   height: 70%;
 }
+
 .button_about {
   display: flex;
   justify-content: center;
@@ -63,6 +100,9 @@ export default {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background-color: #e6e4d7;
 }
+
+
+
 .previous {
   left: 0;
 }
