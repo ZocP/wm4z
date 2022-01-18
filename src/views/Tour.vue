@@ -1,18 +1,27 @@
 <template>
   <div class = "tour">
     <div class = "container_tour">
+
+
       <div class="button_tour previous">
         <img
             src="../assets/elements/arrow_next_white.svg"
             alt=""
-        /></div>
+        />
+      </div>
 
         <div class="swiper_tour"></div>
 
-        <div class="button_tour next">
-          <img src="../assets/elements/arrow_next_white.svg" alt=""
-               style="transform: rotateY(180deg)">
-        </div>
+
+
+
+
+
+
+      <div class="button_tour next">
+        <img src="../assets/elements/arrow_next_white.svg" alt=""
+             style="transform: rotateY(180deg)">
+      </div>
 
       </div>
       <Map class="container_map">
@@ -62,7 +71,15 @@ export default {
   border-radius: 100%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background-color: #A42121;
+  transition: all 0.3s;
 }
+
+.button_tour :hover{
+  transform: scale(1.05);
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+
+
 .next {
   right: 0;
 }

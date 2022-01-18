@@ -2,12 +2,14 @@
   <div class="about">
     <div class="container_about">
       <div class="pic_about">
+
         <div class="button_about previous">
           <img
             src="../assets/elements/arrow_next.svg"
             alt=""
           />
         </div>
+
         <div class="swiper_pics">
           <img
               class=""
@@ -15,10 +17,12 @@
               alt=""
           />
         </div>
+
         <div class="button_about next">
           <img src="../assets/elements/arrow_next.svg" alt=""
           style="transform: rotateY(180deg)">
         </div>
+
       </div>
     </div>
   </div>
@@ -99,19 +103,12 @@ export default {
   border-radius: 100%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background-color: #e6e4d7;
+  transition: all 0.3s;
 }
 
 .button_about:hover {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 45%;
-  border-radius: 100%;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  background-color: blue;
+  transform: scale(1.03);
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
 }
 
 
