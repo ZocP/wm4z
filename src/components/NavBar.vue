@@ -131,7 +131,7 @@ export default {
   background-color: #e6e4d7;
   height: 80px;
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 0px 10px 10px;
+  /*border-radius: 0px 0px 10px 10px;*/
 }
 .whole_red {
   display: flex;
@@ -140,7 +140,7 @@ export default {
   background-color: #A42121;
   height: 80px;
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 0px 0px 10px 10px;
+  /*border-radius: 0px 0px 10px 10px;*/
 }
 
 .nav-img {
@@ -191,6 +191,7 @@ export default {
   font-size: 36px;
   color: #A42121;
   text-decoration: none;
+  cursor: pointer;
 }
 .cell_white{
   flex: 1;
@@ -203,6 +204,7 @@ export default {
   font-size: 36px;
   color: #e6e4d7;
   text-decoration: none;
+  cursor: pointer;
 }
 /*.cell_white:hover{*/
 /*  border-radius: 22px;*/

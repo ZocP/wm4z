@@ -101,6 +101,19 @@ export default {
   background-color: #e6e4d7;
 }
 
+.button_about:hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 45%;
+  border-radius: 100%;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background-color: blue;
+}
+
 
 
 .previous {
