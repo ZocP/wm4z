@@ -2,13 +2,13 @@
   <div class = "tour">
     <div class = "container_tour">
 
-
-      <div class="button_tour previous">
-        <img
-            src="../assets/elements/arrow_next_white.svg"
-            alt=""
-        />
-      </div>
+      <div class="pic_tour">
+        <div class="button_tour previous">
+          <img
+              src="../assets/elements/arrow_next_white.svg"
+              alt=""
+          />
+        </div>
 
         <div class="swiper_tour"></div>
 
@@ -18,10 +18,12 @@
 
 
 
-      <div class="button_tour next">
-        <img src="../assets/elements/arrow_next_white.svg" alt=""
-             style="transform: rotateY(180deg)">
+        <div class="button_tour next">
+          <img src="../assets/elements/arrow_next_white.svg" alt=""
+               style="transform: rotateY(180deg)">
+        </div>
       </div>
+
 
       </div>
       <Map class="container_map">
@@ -58,13 +60,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
+}
+.pic_tour{
+  padding: 1vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 .button_tour {
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   width: 80px;
   height: 80px;
   top: 45%;
@@ -74,7 +85,7 @@ export default {
   transition: all 0.3s;
 }
 
-.button_tour :hover{
+.button_tour:hover{
   transform: scale(1.05);
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
 }
@@ -88,7 +99,7 @@ export default {
 }
 .swiper_tour{
   height:100%;
-  width: 80%;
+  width : 70%;
   background-color: #A42121;
   border-radius : 10px;
 }

@@ -65,6 +65,7 @@ export default {
 .learn_about:hover {
   transform: scale(1.03);
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+
 }
 .more a {
   text-decoration: none;

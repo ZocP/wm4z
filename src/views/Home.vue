@@ -82,7 +82,14 @@ export default {
   background: #e6e4d7;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  transition: all 0.3s;
 }
+
+.button:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+
 .title {
   display: flex;
   align-items:center;
