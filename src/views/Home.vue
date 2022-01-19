@@ -44,7 +44,11 @@ export default {
   background-size: cover;
 }
 .intro {
-  position: absolute;
+
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 45vw;
   height: 45vh;
   left: 15vw;
@@ -56,12 +60,14 @@ export default {
   border-radius: 9px;
 }
 .button p {
+  height: 100%;
+  margin: 0;
   width: 100%;
   font-size: 1.5vw;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: #a42121;
-
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .button {
@@ -76,14 +82,20 @@ export default {
   background: #e6e4d7;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  transition: all 0.3s;
 }
-.title {
-  position: absolute;
-  width: 100%;
-  height: 110px;
-  left: 5%;
-  top: 80px;
 
+.button:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  display: flex;
+  align-items:center;
+  width: 100%;
+  padding: 2vw;
+  margin : 25px;
   font-style: normal;
   font-weight: normal;
   font-size: 3vw;
@@ -95,14 +107,11 @@ export default {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .info {
-  position: absolute;
-  width: 75%;
-  height: 195px;
-  left: 5%;
-  top: 30%;
+  display: flex;
+  align-items:center;
 
-  font-style: normal;
-  font-weight: normal;
+  padding: 2vw;
+  height: 100%;
   font-size: 1.5vw;
   line-height: 3.5vh;
   /* or 135% */
