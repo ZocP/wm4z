@@ -37,7 +37,7 @@ export default {
       email: "Email Us",
       link_mail: "https://www.bilibili.com",
       learnMore: "Learn More About LCDS",
-      link_school: "https://lancastercountryday.org",
+      link_school: "https://www.lancastercountryday.org",
     };
   },
   methods: {

@@ -42,17 +42,18 @@ export default {
   height: 100%;
   background-image: url(../assets/main_background.png);
   background-size: cover;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 .intro {
-
-  position: relative;
+  margin-left: 15vw;
   display:flex;
   flex-direction: column;
   justify-content: space-between;
   width: 45vw;
   height: 45vh;
-  left: 15vw;
-  top: 35%;
 
   background: rgba(80, 80, 80, 0.67);
   background-blend-mode: luminosity;
@@ -71,11 +72,12 @@ export default {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .button {
-  position: absolute;
+
+  margin-right: 15vw;
+  margin-top: 35vh;
   width: 15vw;
   height: 5vw;
-  right: 15%;
-  top: 75vh;
+
   display: flex;
   align-items: center;
 
@@ -95,7 +97,7 @@ export default {
   align-items:center;
   width: 100%;
   padding: 2vw;
-  margin : 25px;
+  margin-top: 2vh;
   font-style: normal;
   font-weight: normal;
   font-size: 3vw;
