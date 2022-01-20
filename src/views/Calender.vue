@@ -27,6 +27,8 @@ export default {
     return{
       a : moment('2022-01-19'),
       b : moment('2022-01-22'),
+      monthEvents :[],
+
     }
   },
   name: "Calender",
@@ -37,40 +39,24 @@ export default {
   methods: {
     getListData(value) {
       let listData;
-      switch (value.date()) {
-        case 8:
+      console.log(this.monthEvents[0])
+      this.monthEvents.forEach(element =>{
+        if(element.date === value.date()){
           listData = [
-            {type: 'warning', content: 'This is warning event.'},
-            {type: 'success', content: 'This is usual event.'},
-          ];
-          break;
-        case 10:
-          listData = [
-            {type: 'warning', content: 'This is warning event.'},
-            {type: 'success', content: 'This is usual event.'},
-            {type: 'error', content: 'This is error event.'},
-          ];
-          break;
-        case 15:
-          listData = [
-            {type: 'warning', content: 'This is warning event'},
-            {type: 'success', content: 'This is very long usual event。。....'},
-            {type: 'error', content: 'This is error event 1.'},
-            {type: 'error', content: 'This is error event 2.'},
-            {type: 'error', content: 'This is error event 3.'},
-            {type: 'error', content: 'This is error event 4.'},
-          ];
-          break;
-        default:
-      }
+            {type: 'default', content: element.event},
+          ]
+        }
+      })
+
+
       return listData || [];
     },
     getEvents(){
       axios.get('http://localhost:8080/calendar',{params:{
           month: new Date().getMonth() + 1,
         }}).then(response =>{
-        this.monthEvents = JSON.parse(response.data)
-        console.log(this.monthEvents)
+          this.monthEvents = response.data.Data;
+        console.log(this.monthEvents);
       }).catch(error => {
         console.log(error)
       })

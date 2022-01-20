@@ -98,6 +98,11 @@ export default {
       return "#A42121";
     },
   },
+  watch: {
+    'this.$route.path;': function(){
+      this.setStyle()
+    }
+  },
 };
 </script>
 

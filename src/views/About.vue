@@ -44,7 +44,7 @@ export default {
           from : 4,
           to : 4,
         }}).then(response =>{
-        this.aboutBackGround = response.data.Data[0].picture
+        this.aboutBackGround = response.data.data[0].picture
       }).catch(error => {
         console.log(error)
       })
