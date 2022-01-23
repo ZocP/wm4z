@@ -44,6 +44,9 @@ html {
 .routerView {
   padding-top: 80px;
 }
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
 
 .slide-right-enter-active,
 .slide-right-leave-active,

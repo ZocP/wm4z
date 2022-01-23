@@ -11,6 +11,13 @@
         </div>
 
         <div class="swiper_pics">
+
+          <Swiper>
+            <swiper-slide>
+
+            </swiper-slide>
+          </Swiper>
+
           <img
               class=""
               :src= "aboutBackGround"
@@ -31,12 +38,18 @@
 <script>
 import about from "../assets/about_pic.png"
 import axios from "axios"
+import {Swiper, SwiperSlide} from "swiper/vue"
+
 export default {
   name: "About",
   data:function(){
     return{
       aboutBackGround : about
     }
+  },
+  components:{
+    Swiper,
+    SwiperSlide,
   },
   methods: {
     requestAbouts(){
@@ -50,9 +63,11 @@ export default {
       })
     }
   },
+
   mounted(){
     this.requestAbouts()
-  }
+  },
+
 }
 </script>
 

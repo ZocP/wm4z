@@ -87,7 +87,6 @@ export default {
         return;
       }
       this.$router.push(item.path);
-      this.setStyle();
     },
   },
   computed: {
@@ -99,7 +98,7 @@ export default {
     },
   },
   watch: {
-    'this.$route.path;': function(){
+    '$route.path': function(){
       this.setStyle()
     }
   },
