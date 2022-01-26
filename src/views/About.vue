@@ -11,18 +11,16 @@
         </div>
 
         <div class="swiper_pics">
-
-          <Swiper>
-            <swiper-slide>
-
+          <Swiper class="swiper" :options="swiperOptions">
+            <swiper-slide v-for="item in slides" :key="item">
+              <img :src="item.background" alt="about_picture" class="slide_picture">
+              <div class="slide_div">
+                <p class="slide_title">{{item.title}}</p>
+                <p class="slide_intro">{{item.intro}}</p>
+              </div>
             </swiper-slide>
           </Swiper>
 
-          <img
-              class=""
-              :src= "aboutBackGround"
-              alt=""
-          />
         </div>
 
         <div class="button_about next">
@@ -38,13 +36,22 @@
 <script>
 import about from "../assets/about_pic.png"
 import axios from "axios"
-import {Swiper, SwiperSlide} from "swiper/vue"
+import {Swiper, SwiperSlide} from "vue-awesome-swiper"
+import 'swiper/css/swiper.css'
+
 
 export default {
   name: "About",
   data:function(){
     return{
-      aboutBackGround : about
+      aboutBackGround : about,
+      slides:[],
+      swiperOptions:{
+        navigation:{
+          nextEl : '.next',
+          prevEl : '.previous'
+        }
+      }
     }
   },
   components:{
@@ -54,10 +61,15 @@ export default {
   methods: {
     requestAbouts(){
       axios.get('http://localhost:8080/about',{params:{
-          from : 4,
-          to : 4,
+          from : 1,
+          to : 5,
         }}).then(response =>{
-        this.aboutBackGround = response.data.data[0].picture
+          console.log(response)
+          response.data.Data.forEach(element =>{
+              this.slides.push({background: element.Picture, title: element.Title ,intro: element.Intro})
+          })
+        this.aboutBackGround = response.data.Data[0].picture
+
       }).catch(error => {
         console.log(error)
       })
@@ -71,22 +83,34 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less">
+.swiper-container{
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide{
+  border-radius:10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .swiper_pics {
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   height: 100%;
   width: 80%;
   background-color: #e6e4d7;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
+
 }
 
 .swiper_pics img{
   height: 100%;
   z-index: 100;
   border-radius:10px;
+  position: absolute;
 }
 
 .container_about {
@@ -126,17 +150,51 @@ export default {
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
 }
 
-
-
+.slide_picture{
+  object-fit: cover;
+  border-radius :10px;
+}
 .previous {
   left: 0;
 }
-
 .next {
   right: 0;
 }
-
 .about {
   height: 100vh;
+}
+
+.slide_div{
+  z-index:100;
+  display: flex;
+
+  flex-direction: column;
+  margin-right: 10vw;
+  margin-top: 15vh;
+  width: 35vw;
+  height: 30vh;
+  background: #323232c4;
+  background-blend-mode: luminosity;
+  box-shadow: 0px 4px 6px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+}
+
+.slide_title{
+  margin: 3vh 3vw;
+  font-size: 3vh;
+
+  /* or 126% */
+  color: #FFFFFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.slide_intro{
+  height: 100%;
+  margin: 3vh 3vw;
+  font-size: 2vh;
+
+  /* or 126% */
+  color: #FFFFFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 </style>
