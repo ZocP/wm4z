@@ -93,11 +93,12 @@ export default {
 }
 
 .title {
+  overflow: hidden;
   display: flex;
   align-items:center;
   width: 100%;
-  padding: 2vw;
-  margin-top: 2vh;
+  padding: 3vh 3vw;
+  margin: 1vh 1vw;
   font-style: normal;
   font-weight: normal;
   font-size: 3vw;
@@ -111,8 +112,8 @@ export default {
 .info {
   display: flex;
   align-items:center;
-
-  padding: 2vw;
+  padding: 3vh 3vw;
+  margin: 1vh 1vw;
   height: 100%;
   font-size: 1.5vw;
   line-height: 3.5vh;
