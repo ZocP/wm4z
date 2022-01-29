@@ -3,7 +3,7 @@
     <div class = "container_tour">
 
       <div class="pic_tour">
-        <div class="button_tour previous">
+        <div class="button_tour previous" @click=previous>
           <img
               src="../assets/elements/arrow_next_white.svg"
               alt=""
@@ -11,17 +11,13 @@
         </div>
 
         <div class="swiper_tour">
-          <Swiper :options="swiperOptions">
-            <swiper-slide v-for="item in getSlide()" :key="item">
-              <div class="drager">
-                <img :src=item.pic>
-              </div>
-            </swiper-slide>
-          </Swiper>
+          <div class="drag">
+            <img :src=currentPic>
+          </div>
         </div>
 
 
-        <div class="button_tour next">
+        <div class="button_tour next" @click=next>
           <img src="../assets/elements/arrow_next_white.svg" alt=""
                style="transform: rotateY(180deg)">
         </div>
@@ -50,9 +46,7 @@
 
 <script>
 import axios from "axios"
-import {Swiper, SwiperSlide} from "vue-awesome-swiper"
 import 'swiper/css/swiper.css'
-
 import "ant-design-vue/lib/dropdown/style/css"
 
 export default {
@@ -64,47 +58,43 @@ export default {
           prevEl : '.previous',
         },
       },
-      floors: [{content:[]},{content:[]},{content:[]}],
+      store: [{content:[]},{content:[]},{content:[]}],
+      currentIndex: 0,
       defaultFloor: 0,
     }
   },
   name: "Tour",
   computed:{
-  },
-  components:{
-    Swiper,
-    SwiperSlide,
-
+    currentPic: function(){
+      return this.store[this.defaultFloor].content[this.currentIndex]?.Picture || "";
+    }
   },
   methods:{
-    getSlide(){
-      let actual = [];
-      console.log(this.floors[this.defaultFloor].content)
-      setTimeout(()=>{
-        for(let i = 0; i < this.floors[this.defaultFloor].content.length; i ++){
-          if(this.floors[this.defaultFloor].content[i] !== undefined){
-            actual.push(this.floors[this.defaultFloor].content[i])
-          }
-        }
-      },500)
-      console.log(actual)
-      return actual
+    previous(){
+      if(this.store[this.defaultFloor].content[this.currentIndex - 1] !== undefined){
+        this.currentIndex --;
+        console.log("go to index: ", this.currentIndex)
+      }
     },
-    request(){
+    next(){
+      if(this.store[this.defaultFloor].content[this.currentIndex + 1] !== undefined){
+        this.currentIndex ++;
+        console.log("go to index: ", this.currentIndex)
+      }
+    },
+    request(floor){
       axios.get('http://localhost:8080/tour',{
         params:{
-          floor:0,
-          from: 1,
-          to: 2,
+          floor:floor,
         }
       }).then(response =>{
+        console.log(response)
         if(response.data.code !== 0){
           console.log("not found ")
           return
         }
-        response.data.Data.forEach(element =>{
-          this.floors[0].content[element.ID] = {pic : element.Picture, map : element.Map, fl : element.Floor_number}
-        })
+        this.store[response.data.Data.FloorNumber].content = response.data.Data.Positions
+        console.log(response.data.Data.Positions)
       })
     },
     handleMenuClick({key}){
@@ -127,7 +117,7 @@ export default {
     },
   },
   mounted(){
-    this.request()
+    this.request(0);
   }
 };
 </script>
@@ -193,6 +183,10 @@ export default {
   width : 70%;
   background-color: #A42121;
   border-radius : 10px;
+  overflow:hidden;
+}
+.swiper_tour img{
+  height: 100%;
 }
 
 .container_map{
@@ -214,7 +208,9 @@ export default {
   object-fit: cover;
 }
 
-.drager{
-
+.drag{
+  height: 100%;
 }
+
+
 </style>
