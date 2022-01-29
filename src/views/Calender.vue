@@ -2,13 +2,13 @@
   <keep-alive>
   <div class = "calender">
     <div class = "">
-        <Calendar class ="calender_container" mode="month" :validRange=range>
+        <a-calendar class ="calender_container" mode="month" :validRange=range>
           <ul slot="dateCellRender" slot-scope="value" class="events">
             <li v-for="item in getListData(value)" :key="item.content">
-              <Abadge :status="item.type" :text="item.content" />
+              <a-badge :status="item.type" :text="item.content" />
             </li>
           </ul>
-        </Calendar>
+        </a-calendar>
     </div>
   </div>
 </keep-alive>
@@ -16,9 +16,8 @@
 
 <script>
 
-import Calendar from 'ant-design-vue/lib/calendar';
 import 'ant-design-vue/lib/calendar/style/css';
-import Abadge from 'ant-design-vue/lib/badge'
+import 'ant-design-vue/lib/badge/style/css'
 import moment from 'moment'
 import axios from "axios";
 
@@ -30,10 +29,6 @@ export default {
     }
   },
   name: "Calender",
-  components:{
-    Calendar,
-    Abadge
-  },
   methods: {
     getListData(value) {
       let listData;
@@ -45,8 +40,6 @@ export default {
           ]
         }
       })
-
-
       return listData || [];
     },
     getEvents(){

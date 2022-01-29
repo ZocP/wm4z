@@ -10,12 +10,15 @@
           />
         </div>
 
-        <div class="swiper_tour"></div>
-
-
-
-
-
+        <div class="swiper_tour">
+          <Swiper :options="swiperOptions">
+            <swiper-slide v-for="item in getSlide()" :key="item">
+              <div class="drager">
+                <img :src=item.pic>
+              </div>
+            </swiper-slide>
+          </Swiper>
+        </div>
 
 
         <div class="button_tour next">
@@ -26,17 +29,105 @@
 
 
       </div>
-      <Map class="container_map">
-      </Map>
+    <div>
+      <div class="container_map">
+        <div class = "pic">
+          <img src="../assets/first_floor.png">
+        </div>
+        <a-dropdown-button>
+          abc
+          <a-menu slot="overlay" @click="handleMenuClick">
+            <a-menu-item key="1"> <a-icon type="bars" />First Floor</a-menu-item>
+            <a-menu-item key="2"> <a-icon type="bars" />Second Floor</a-menu-item>
+            <a-menu-item key="3"> <a-icon type="bars" />Third Floor</a-menu-item>
+          </a-menu>
+        </a-dropdown-button>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
-import Map from "../components/Map"
+import axios from "axios"
+import {Swiper, SwiperSlide} from "vue-awesome-swiper"
+import 'swiper/css/swiper.css'
+
+import "ant-design-vue/lib/dropdown/style/css"
+
 export default {
+  data: function(){
+    return {
+      swiperOptions:{
+        navigation: {
+          nextEl : '.next',
+          prevEl : '.previous',
+        },
+      },
+      floors: [{content:[]},{content:[]},{content:[]}],
+      defaultFloor: 0,
+    }
+  },
   name: "Tour",
+  computed:{
+  },
   components:{
-    Map,
+    Swiper,
+    SwiperSlide,
+
+  },
+  methods:{
+    getSlide(){
+      let actual = [];
+      console.log(this.floors[this.defaultFloor].content)
+      setTimeout(()=>{
+        for(let i = 0; i < this.floors[this.defaultFloor].content.length; i ++){
+          if(this.floors[this.defaultFloor].content[i] !== undefined){
+            actual.push(this.floors[this.defaultFloor].content[i])
+          }
+        }
+      },500)
+      console.log(actual)
+      return actual
+    },
+    request(){
+      axios.get('http://localhost:8080/tour',{
+        params:{
+          floor:0,
+          from: 1,
+          to: 2,
+        }
+      }).then(response =>{
+        if(response.data.code !== 0){
+          console.log("not found ")
+          return
+        }
+        response.data.Data.forEach(element =>{
+          this.floors[0].content[element.ID] = {pic : element.Picture, map : element.Map, fl : element.Floor_number}
+        })
+      })
+    },
+    handleMenuClick({key}){
+      switch(key){
+        case "1":
+          console.log("default change to 0")
+          this.defaultFloor = 0;
+          break
+        case "2":
+          console.log("default change to 1")
+          this.defaultFloor = 1;
+          break;
+        case "3":
+          console.log("default change to 2")
+          this.defaultFloor = 2;
+          break;
+          default:
+            this.defaultFloor = 0;
+      }
+    },
+  },
+  mounted(){
+    this.request()
   }
 };
 </script>
@@ -56,7 +147,7 @@ export default {
   position: relative;
   overflow: hidden;
   width: 70vw;
-  height: 70vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,11 +194,27 @@ export default {
   background-color: #A42121;
   border-radius : 10px;
 }
-.container_map{
-  width: 25vw;
-  height: 0;
 
-  padding-bottom: 37.5%;
-  margin: 50px;
+.container_map{
+  padding: 1vw;
+  display: flex;
+  justify-content:space-between;
+  flex-direction: column;
+  width: 30vw;
+  height:80vh;
+  margin-right: 5vw;
+}
+
+.pic{
+  overflow: hidden;
+
+}
+.pic img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.drager{
+
 }
 </style>

@@ -20,7 +20,6 @@
               </div>
             </swiper-slide>
           </Swiper>
-
         </div>
 
         <div class="button_about next">
