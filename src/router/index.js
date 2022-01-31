@@ -6,6 +6,7 @@ import About from "../views/About";
 import Tour from "../views/Tour"
 import Calender from "../views/Calender";
 import More from "../views/More";
+// import Test from "../views/tester"
 Vue.use(VueRouter)
 
 const routes = [
@@ -52,7 +53,15 @@ const routes = [
     meta: {
       index: 4
     }
-  }
+  },
+  // {
+  //   path: '/test',
+  //   name:'Test',
+  //   component: Test,
+  //   meta:{
+  //     index: 5
+  //   }
+  // }
 ]
 
 const router = new VueRouter({

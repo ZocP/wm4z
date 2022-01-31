@@ -11,8 +11,8 @@
         </div>
 
         <div class="swiper_tour">
-          <div class="drag">
-            <img :src=currentPic @mousedown="holdDown" @mouseup="holdUp" :style="'top: '+imgtop+'px;left: '+imgleft+'px;'" border="0" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+          <div id="dragger"  class="drag">
+            <img :src=currentPic @mouseleave="leave" @mousedown="holdDown" @mousemove="mouseMove" @mouseup="holdUp" :style="style" draggable="false" alt="">
           </div>
         </div>
 
@@ -48,6 +48,7 @@
 import axios from "axios"
 import 'swiper/css/swiper.css'
 import "ant-design-vue/lib/dropdown/style/css"
+import test from "../test/F1N1.png"
 
 export default {
   data: function(){
@@ -62,16 +63,17 @@ export default {
       currentIndex: 0,
       defaultFloor: 0,
 
-      imgtop: 0, //图片距离左边的距离
-      imgleft: 0, //图片距离上边的距离
-      imgheight: 100, //图片高度百分比
-      DownUp: false, //用来判断鼠标是否长按
+      Movable: false,
+      moveStart: {x : 0, y : 0},
+      trans : {x : 0, y : 0},
+      style : null,
     }
   },
   name: "Tour",
   computed:{
     currentPic: function(){
-      return this.store[this.defaultFloor].content[this.currentIndex]?.Picture || "";
+      return test
+      //return this.store[this.defaultFloor].content[this.currentIndex]?.Picture || "";
     }
   },
   methods:{
@@ -120,60 +122,35 @@ export default {
             this.defaultFloor = 0;
       }
    },
-    holdDown() {
-      this.DownUp = true;
+    holdDown(e) {
+      this.Movable = true;
+      this.moveStart.x = e.clientX
+      this.moveStart.y = e.clientY
+      this.Movable = true
+
     },
     //鼠标松开
     holdUp() {
-      this.DownUp = false;
-    },
-    //ev：鼠标对象，id：盒子的id 判断鼠标是否在盒子内
-    inBoxIsoutbox(id, ev = event || window.event) {
-      let map = document.getElementById(id);
-      if (
-          this.mousePosition(ev).x > map.offsetLeft + map.offsetWidth ||
-          this.mousePosition(ev).x < map.offsetLeft ||
-          this.mousePosition(ev).y > map.offsetTop + map.offsetHeight ||
-          this.mousePosition(ev).y < map.offsetTop
-      ) {
-        return false;
-      } else {
-        return true;
-      }
+      this.Movable = false;
     },
     //兼容后，返回X，Y
-    mousePosition(ev) {
-      if (ev.pageX || ev.pageY) {
-        return { x: ev.pageX, y: ev.pageY };
+    mouseMove(e){
+      e.preventDefault();
+      if(this.Movable){
+        this.trans.x = e.clientX;
+        let x = this.moveStart.x - this.trans.x;
+        let img=document.querySelector("#dragger img");
+        this.style=`left:${img.offsetLeft-x}px`;
+        console.log("x: ", this.moveStart.x, "y", this.moveStart.y)
+        this.moveStart.x = this.trans.x;
       }
-      return {
-        x:
-            ev.clientX +
-            document.body.scrollLeft -
-            document.body.clientLeft,
-        y:
-            ev.clientY +
-            document.body.scrollTop -
-            document.body.clientTop,
-      };
+
     },
-    // 鼠标移动触发该方法
-    mouseMove(ev) {
-      ev = ev || window.event;
-      if (this.inBoxIsoutbox("mapbox", ev)) {
-        // 鼠标在盒子内
-        this.runWheel(true);
-      } else {
-        // 鼠标在盒子外
-        this.runWheel(false);
-        this.holdUp();
-      }
-      if (this.DownUp) {
-        // 鼠标长按时改变图片位置
-        this.imgtop = this.imgtop + ev.movementY;
-        this.imgleft = this.imgleft + ev.movementX;
-      }
-    },
+
+    leave(){
+      this.Movable = false;
+    }
+
   },
 
   mounted(){
@@ -272,7 +249,13 @@ export default {
   height: 100%;
   z-index: 100;
   user-select: none;
-  -webkit-user-drag: none;
+  position: relative;
+
+}
+.drag img{
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 
