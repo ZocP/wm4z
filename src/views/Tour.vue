@@ -12,7 +12,7 @@
 
         <div class="swiper_tour">
           <div class="drag">
-            <img :src=currentPic>
+            <img :src=currentPic @mousedown="holdDown" @mouseup="holdUp" :style="'top: '+imgtop+'px;left: '+imgleft+'px;'" border="0" cellpadding="0" cellspacing="0" style="margin:0 auto;">
           </div>
         </div>
 
@@ -61,6 +61,11 @@ export default {
       store: [{content:[]},{content:[]},{content:[]}],
       currentIndex: 0,
       defaultFloor: 0,
+
+      imgtop: 0, //图片距离左边的距离
+      imgleft: 0, //图片距离上边的距离
+      imgheight: 100, //图片高度百分比
+      DownUp: false, //用来判断鼠标是否长按
     }
   },
   name: "Tour",
@@ -114,8 +119,63 @@ export default {
           default:
             this.defaultFloor = 0;
       }
+   },
+    holdDown() {
+      this.DownUp = true;
+    },
+    //鼠标松开
+    holdUp() {
+      this.DownUp = false;
+    },
+    //ev：鼠标对象，id：盒子的id 判断鼠标是否在盒子内
+    inBoxIsoutbox(id, ev = event || window.event) {
+      let map = document.getElementById(id);
+      if (
+          this.mousePosition(ev).x > map.offsetLeft + map.offsetWidth ||
+          this.mousePosition(ev).x < map.offsetLeft ||
+          this.mousePosition(ev).y > map.offsetTop + map.offsetHeight ||
+          this.mousePosition(ev).y < map.offsetTop
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    //兼容后，返回X，Y
+    mousePosition(ev) {
+      if (ev.pageX || ev.pageY) {
+        return { x: ev.pageX, y: ev.pageY };
+      }
+      return {
+        x:
+            ev.clientX +
+            document.body.scrollLeft -
+            document.body.clientLeft,
+        y:
+            ev.clientY +
+            document.body.scrollTop -
+            document.body.clientTop,
+      };
+    },
+    // 鼠标移动触发该方法
+    mouseMove(ev) {
+      ev = ev || window.event;
+      if (this.inBoxIsoutbox("mapbox", ev)) {
+        // 鼠标在盒子内
+        this.runWheel(true);
+      } else {
+        // 鼠标在盒子外
+        this.runWheel(false);
+        this.holdUp();
+      }
+      if (this.DownUp) {
+        // 鼠标长按时改变图片位置
+        this.imgtop = this.imgtop + ev.movementY;
+        this.imgleft = this.imgleft + ev.movementX;
+      }
     },
   },
+
   mounted(){
     this.request(0);
   }
@@ -210,6 +270,9 @@ export default {
 
 .drag{
   height: 100%;
+  z-index: 100;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 
