@@ -81,12 +81,14 @@ export default {
       if(this.store[this.defaultFloor].content[this.currentIndex - 1] !== undefined){
         this.currentIndex --;
         console.log("go to index: ", this.currentIndex)
+        this.style = null;
       }
     },
     next(){
       if(this.store[this.defaultFloor].content[this.currentIndex + 1] !== undefined){
         this.currentIndex ++;
         console.log("go to index: ", this.currentIndex)
+        this.style = null;
       }
     },
     request(floor){
@@ -136,10 +138,17 @@ export default {
     //兼容后，返回X，Y
     mouseMove(e){
       e.preventDefault();
+
       if(this.Movable){
+        let img = document.querySelector("#dragger img");
+        let div = document.querySelector("#dragger")
+        let rect1 = img.getBoundingClientRect();
+        let rect2= div.getBoundingClientRect();
         this.trans.x = e.clientX;
         let x = this.moveStart.x - this.trans.x;
-        let img=document.querySelector("#dragger img");
+        if(img.offsetLeft - x + rect1.left > rect2.left || img.offsetLeft-x + rect1.right < rect2.right){
+          return
+        }
         this.style=`left:${img.offsetLeft-x}px`;
         console.log("x: ", this.moveStart.x, "y", this.moveStart.y)
         this.moveStart.x = this.trans.x;
@@ -190,6 +199,7 @@ export default {
   height: 100%;
 }
 .button_tour {
+  user-select: none;
   z-index: 1000;
   display: flex;
   justify-content: center;
