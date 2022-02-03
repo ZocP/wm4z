@@ -43,7 +43,7 @@ export default {
       return listData || [];
     },
     getEvents(){
-      axios.get('http://localhost:8080/calendar',{params:{
+      axios.get('http://www.lancastertsa.com:1001/calendar',{params:{
           month: new Date().getMonth() + 1,
         }}).then(response =>{
           this.monthEvents = response.data.Data;

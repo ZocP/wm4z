@@ -35,7 +35,7 @@ export default {
         "725 Hamilton Road<br/>" +
         "Lancaster PA, 17603",
       email: "Email Us",
-      link_mail: "https://www.bilibili.com",
+      link_mail: "mailto:biltzj@lancastercountryday.org",
       learnMore: "Learn More About LCDS",
       link_school: "https://www.lancastercountryday.org",
     };

@@ -12,7 +12,7 @@
 
         <div class="swiper_pics">
           <Swiper class="swiper" :options="swiperOptions">
-            <swiper-slide v-for="item in slides" :key="item">
+            <swiper-slide v-for="item in slides" :key="item.length">
               <img :src="item.background" alt="about_picture" class="slide_picture">
               <div class="slide_div">
                 <p class="slide_title">{{item.title}}</p>
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     requestAbouts(){
-      axios.get('http://localhost:8080/about',{params:{
+      axios.get('http://www.lancastertsa.com:1001/about',{params:{
           from : 1,
           to : 5,
         }}).then(response =>{

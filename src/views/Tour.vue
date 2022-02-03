@@ -23,19 +23,21 @@
         </div>
       </div>
 
-
+      <div class="remind">
+          <p>{{reminder}}</p>
+      </div>
       </div>
     <div>
       <div class="container_map">
         <div class = "pic">
-          <img src="../assets/first_floor.png">
+          <img :src=floorMap>
         </div>
         <a-dropdown-button>
-          abc
+          Current Floor: {{CurrentFloor}}
           <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item key="1"> <a-icon type="bars" />First Floor</a-menu-item>
-            <a-menu-item key="2"> <a-icon type="bars" />Second Floor</a-menu-item>
-            <a-menu-item key="3"> <a-icon type="bars" />Third Floor</a-menu-item>
+            <a-menu-item key="1" style="display:none"> <a-icon type="bars" />Basement</a-menu-item>
+            <a-menu-item key="2"> <a-icon type="bars" />First Floor</a-menu-item>
+            <a-menu-item key="3"> <a-icon type="bars" />Second Floor</a-menu-item>
           </a-menu>
         </a-dropdown-button>
       </div>
@@ -48,7 +50,7 @@
 import axios from "axios"
 import 'swiper/css/swiper.css'
 import "ant-design-vue/lib/dropdown/style/css"
-import test from "../test/F1N1.png"
+// import test from "../test/F1N1.png"
 
 export default {
   data: function(){
@@ -61,19 +63,21 @@ export default {
       },
       store: [{content:[]},{content:[]},{content:[]}],
       currentIndex: 0,
-      defaultFloor: 0,
-
+      defaultFloor: 1,
+      CurrentFloor: 1,
       Movable: false,
       moveStart: {x : 0, y : 0},
       trans : {x : 0, y : 0},
       style : null,
+      floorMap: "https://wm4z.oss-us-east-1.aliyuncs.com/tours/floors/F1.png",
+      reminder: "Try to drag around",
     }
   },
   name: "Tour",
   computed:{
     currentPic: function(){
-      return test
-      //return this.store[this.defaultFloor].content[this.currentIndex]?.Picture || "";
+      // return test
+      return this.store[this.defaultFloor].content[this.currentIndex]?.Picture || "";
     }
   },
   methods:{
@@ -92,7 +96,7 @@ export default {
       }
     },
     request(floor){
-      axios.get('http://localhost:8080/tour',{
+      axios.get('http://www.lancastertsa.com:1001/tour',{
         params:{
           floor:floor,
         }
@@ -111,14 +115,26 @@ export default {
         case "1":
           console.log("default change to 0")
           this.defaultFloor = 0;
+          this.CurrentFloor = -1;
+            this.currentIndex= 0;
+            this.request(0);
+            this.floorMap = "https://wm4z.oss-us-east-1.aliyuncs.com/tours/floors/F3.png"
           break
         case "2":
           console.log("default change to 1")
           this.defaultFloor = 1;
+          this.CurrentFloor = 1;
+          this.currentIndex= 0;
+          this.request(1)
+          this.floorMap = "https://wm4z.oss-us-east-1.aliyuncs.com/tours/floors/F1.png"
           break;
         case "3":
           console.log("default change to 2")
           this.defaultFloor = 2;
+          this.CurrentFloor = 2;
+          this.currentIndex= 0;
+          this.request(2);
+          this.floorMap = "https://wm4z.oss-us-east-1.aliyuncs.com/tours/floors/F2.png"
           break;
           default:
             this.defaultFloor = 0;
@@ -150,7 +166,6 @@ export default {
           return
         }
         this.style=`left:${img.offsetLeft-x}px`;
-        console.log("x: ", this.moveStart.x, "y", this.moveStart.y)
         this.moveStart.x = this.trans.x;
       }
 
@@ -163,7 +178,7 @@ export default {
   },
 
   mounted(){
-    this.request(0);
+    this.request(1);
   }
 };
 </script>
@@ -268,5 +283,26 @@ export default {
   top: 0;
 }
 
+.remind{
+  position: relative;
+  top:40%;
+  z-index: 1000;
+  width : 10vw;
+  height: 5vh;
+  background: rgba(68, 56, 56, 0.49);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.remind p{
+  margin: 0;
+  height:100%;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  color: #e6e4d7;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 1vw;
+}
 
 </style>
