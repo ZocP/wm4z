@@ -1,4 +1,16 @@
 # webmaster
+This is Lancaster Country Day School TSA Group work Webmaster.
+Complete log can be checked via commit on this page.
+
+## Technology used
+
+### Frontend
+Programming language: JavaScirpt
+Framework used: Vue.js 2
+Package used: Moment, AntDesgin Vue, Axios
+
+### Backend
+https://github.com/ZocP/wm4z_back
 
 ## Project setup
 ```
