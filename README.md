@@ -34,3 +34,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+##Update plan:
+Sep-Nov: Page design finished
+Nov-Jan: Learn how to use Vue
+Jan-Feb: Develop frontend with requirement.
