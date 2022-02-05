@@ -5,9 +5,10 @@ Complete log can be checked via commit on this page.
 ## Technology used
 
 ### Frontend
-Programming language: JavaScirpt
-Framework used: Vue.js 2
-Package used: Moment, AntDesgin Vue, Axios
+1. Programming language: JavaScirpt
+2. Framework used: Vue.js 2
+3. Package used: Moment, AntDesgin Vue, Axios
+4. Deployment: Docker
 
 ### Backend
 https://github.com/ZocP/wm4z_back
